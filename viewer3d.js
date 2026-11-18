@@ -1,3 +1,5 @@
+const guidePageNumber=legacy=>PAGES.find(p=>p.legacyLabel===String(legacy))?.label;
+const guidePageHref=legacy=>'#guide/page-'+guidePageNumber(legacy);
 /* MORAL read-only CAD display. No third-party services or geometry edits. */
 (() => {
   'use strict';
@@ -87,7 +89,7 @@
   function movePan(dx,dy){const d=canvas.width/canvas.getBoundingClientRect().width;pan[0]+=dx*d/(fitScale*zoom);pan[1]-=dy*d/(fitScale*zoom);}
   function selectPart(id){
     const part=meta.parts.find(p=>p.index===id);selected=part?id:-1;panel.hidden=!part;picker.value=part?String(id):'';
-    if(part){byId('cad-part-name').textContent=part.name;byId('cad-part-parent').textContent=part.parent;byId('cad-part-note').textContent=part.note||'';const link=byId('cad-part-guide');link.hidden=!part.guide_page;link.href='#guide/'+part.guide_page;link.textContent=part.stage==='פריקה'?'להוראות הפריקה ←':'לשלב '+part.stage+' בחוברת ←';const u=byId('cad-part-unpack');u.hidden=!part.unpack_page||part.unpack_page===part.guide_page;u.href='#guide/'+part.unpack_page;const extra=byId('cad-part-related');extra.hidden=!part.related_page;extra.href='#guide/'+part.related_page;extra.textContent=part.related_label||'';canvas.dataset.selectedPart=part.name;canvas.dataset.selectedIndex=String(id);}
+    if(part){byId('cad-part-name').textContent=part.name;byId('cad-part-parent').textContent=part.parent;byId('cad-part-note').textContent=part.note||'';const link=byId('cad-part-guide');link.hidden=!part.guide_page;link.href=guidePageHref(part.guide_page);link.textContent='לעמוד '+guidePageNumber(part.guide_page)+' בחוברת ←';const u=byId('cad-part-unpack');u.hidden=!part.unpack_page||part.unpack_page===part.guide_page;u.href=guidePageHref(part.unpack_page);u.textContent='להוראות הפריקה · עמוד '+guidePageNumber(part.unpack_page)+' ←';const extra=byId('cad-part-related');extra.hidden=!part.related_page;extra.href=guidePageHref(part.related_page);extra.textContent=(part.related_label||'חיבור נוסף')+' · עמוד '+guidePageNumber(part.related_page)+' ←';canvas.dataset.selectedPart=part.name;canvas.dataset.selectedIndex=String(id);}
     else{delete canvas.dataset.selectedPart;delete canvas.dataset.selectedIndex;}drawSoon();
   }
   function pick(x,y){
