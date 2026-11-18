@@ -10,3 +10,5 @@
 
 .cad-viewport .part-card{position:absolute;inset-inline-end:12px;bottom:12px;max-width:420px;z-index:3;background:#fffaf3f7;box-shadow:0 8px 30px #172c3624}.part-card nav a{font-size:14px}.part-card p{font-size:14px;line-height:1.5;margin:8px 0}.part-card>div{gap:10px}.part-card>div button{padding:5px 10px;min-height:36px}.part-card bdi{font-size:24px}@media(max-width:600px){.cad-viewport .part-card{inset-inline:8px;bottom:8px;max-width:none;padding:10px}.part-card p{font-size:12px}.part-card nav a{padding:9px;font-size:13px}.part-card span{font-size:13px}}
 a.primary{padding:9px 17px;min-height:44px;border-radius:8px;text-decoration:none}
+
+.footer-brand{display:flex;flex-direction:column;gap:4px;align-items:flex-start}.project-management{font-size:11px;font-weight:400;color:#4B5258;line-height:1.5}
